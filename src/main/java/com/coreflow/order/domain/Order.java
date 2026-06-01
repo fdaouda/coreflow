@@ -19,20 +19,20 @@ import java.util.UUID;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(nullable = false)
+    @Column(name = "id", nullable = false)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(name = "customer_id", nullable = false)
     private String customerId;
 
-    @Column(nullable = false)
+    @Column(name = "amount", nullable = false)
     private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "status", nullable = false, length = 30)
     private OrderStatus status;
 
 
-    @Column(nullable = false)
+    @Column(name = "created_at", nullable = false)
     private Instant createdAt;
 }

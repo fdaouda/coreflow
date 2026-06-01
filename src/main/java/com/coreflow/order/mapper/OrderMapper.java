@@ -20,7 +20,6 @@ public class OrderMapper {
                 .map( item -> item.price().multiply(BigDecimal.valueOf(item.quantity())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        order.setId(UUID.randomUUID());
         order.setStatus(OrderStatus.PENDING);
         order.setCreatedAt(Instant.now());
         order.setAmount(totalAmount);
