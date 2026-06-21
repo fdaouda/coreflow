@@ -3,12 +3,12 @@ package com.coreflow.order.controller.dto;
 import com.coreflow.order.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/orders")
@@ -29,5 +29,15 @@ public class OrderController {
                 .toUri();
 
         return ResponseEntity.created(location).body(orderResponse);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<OrderResponse>> getAllOrders() {
+        return ResponseEntity.ok(orderService.getAllOrders());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<OrderResponse> getOrder(@PathVariable UUID id) {
+        return ResponseEntity.ok(orderService.getOrderById(id));
     }
 }
