@@ -1,6 +1,7 @@
 package com.coreflow.order.controller.dto;
 
 import com.coreflow.order.service.OrderService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<OrderResponse> createOrder(@RequestBody CreateOrderRequest createOrderRequest) {
+    public ResponseEntity<OrderResponse> createOrder(@Valid @RequestBody CreateOrderRequest createOrderRequest) {
         OrderResponse orderResponse = orderService.createOrder(createOrderRequest);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
