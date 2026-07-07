@@ -12,7 +12,7 @@ public record OrderItemDto(
 
         @NotNull(message = "Quantity cannot be null")
         @Positive(message = "Quantity must be positive")
-        int quantity,
+        Integer quantity,
 
         @NotNull(message = "Price cannot be null")
         @Positive(message = "Price must be positive")
