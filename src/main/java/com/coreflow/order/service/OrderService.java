@@ -42,8 +42,6 @@ public class OrderService {
 
     @Transactional
     public List<OrderResponse> getAllOrders() {
-        List<Order> orders = orderRepository.findAll();
-
         return orderRepository.findAll().stream()
                 .map(OrderMapper::toResponse)
                 .toList();

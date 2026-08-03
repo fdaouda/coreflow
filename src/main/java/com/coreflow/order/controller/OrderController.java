@@ -1,5 +1,7 @@
-package com.coreflow.order.controller.dto;
+package com.coreflow.order.controller;
 
+import com.coreflow.order.controller.dto.CreateOrderRequest;
+import com.coreflow.order.controller.dto.OrderResponse;
 import com.coreflow.order.service.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
