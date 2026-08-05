@@ -23,6 +23,7 @@ public class OrderKafkaConsumer {
                         @Header(KafkaHeaders.RECEIVED_KEY) String key,
                         @Header(KafkaHeaders.RECEIVED_PARTITION) int partition)
     {
+
         log.info(" [Kafka] Message reçu avec Key={}", key);
 
 
