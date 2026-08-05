@@ -3,6 +3,8 @@ package com.coreflow.order.service;
 import com.coreflow.order.controller.dto.CreateOrderRequest;
 import com.coreflow.order.controller.dto.OrderResponse;
 import com.coreflow.order.domain.Order;
+import com.coreflow.order.event.OrderCreatedEvent;
+import com.coreflow.order.event.OrderProducer;
 import com.coreflow.order.mapper.OrderMapper;
 import com.coreflow.order.repository.OrderRepository;
 import org.springframework.http.HttpStatus;
@@ -16,18 +18,30 @@ import java.util.UUID;
 @Service
 public class OrderService {
     private final OrderRepository orderRepository;
+    private final OrderProducer orderProducer;
 
-    public OrderService(OrderRepository orderRepository) {
+    public OrderService(OrderRepository orderRepository, OrderProducer orderProducer) {
         this.orderRepository = orderRepository;
+        this.orderProducer = orderProducer;
     }
 
     @Transactional
     public OrderResponse createOrder(CreateOrderRequest createOrderRequest) {
         Order orderEntity = OrderMapper.toEntity(createOrderRequest);
 
+        //DB persitence
         Order savedOrder = orderRepository.save(orderEntity);
 
-        // Business logic for creating an order can be added here
+        //OrderCreated event kafka
+        OrderCreatedEvent orderCreatedEvent = new OrderCreatedEvent(
+                savedOrder.getId(),
+                UUID.fromString(savedOrder.getCustomerId()),
+                savedOrder.getAmount()
+        );
+
+        //emit event
+        orderProducer.sendOrderCreated(orderCreatedEvent);
+
         return OrderMapper.toResponse(savedOrder);
     }
 
@@ -36,7 +50,6 @@ public class OrderService {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Order not found"));
 
-        // Business logic for retrieving an order can be added here
         return OrderMapper.toResponse(order);
     }
 
