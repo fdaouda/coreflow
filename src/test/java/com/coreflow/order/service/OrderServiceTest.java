@@ -5,6 +5,7 @@ import com.coreflow.order.controller.dto.OrderItemDto;
 import com.coreflow.order.controller.dto.OrderResponse;
 import com.coreflow.order.domain.Order;
 import com.coreflow.order.domain.OrderStatus;
+import com.coreflow.order.event.OrderProducer;
 import com.coreflow.order.repository.OrderRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,9 @@ public class OrderServiceTest {
 
     @Mock
     private OrderRepository orderRepository;
+
+    @Mock
+    private OrderProducer orderProducer;
 
     @InjectMocks
     private OrderService orderService;
