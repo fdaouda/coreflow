@@ -34,3 +34,16 @@ spring:
     port: 5672
     username: guest
     password: guest
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  # Expose tout les endpoints de management (health, metrics, etc.)
+  endpoint:
+    health:
+      show-details: always                  # Affiche le détail de la santé (état de la BDD, Kafka, RabbitMQ)
+    prometheus:
+      enabled: true                         # Active le formatage des données pour Prometheus
+  metrics:
+    tags:
+      application: coreflow-service         # Tag utilisé pour identifier ton app dans Grafana
