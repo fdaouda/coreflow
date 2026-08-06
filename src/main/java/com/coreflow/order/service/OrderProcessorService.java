@@ -33,7 +33,7 @@ public class OrderProcessorService {
     @Transactional
     public void process(OrderCreatedEvent event) {
 
-        if (processedEventRepository.existsByEventId(event.orderId().toString())) {
+        if (processedEventRepository.existsByEventId(event.orderId())) {
             log.warn(" [Idempotence] l'event OrderId={} est ignoré car il a déjà été traité par Kafka", event.orderId());
             return;
         }

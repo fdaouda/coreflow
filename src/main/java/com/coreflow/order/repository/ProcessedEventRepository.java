@@ -9,5 +9,5 @@ import java.util.UUID;
 @Repository
 public interface ProcessedEventRepository extends JpaRepository<ProcessedEvent, UUID> {
     // String correspond au type de @Id (eventId)
-    boolean existsByEventId(String eventId);
+    boolean existsByEventId(UUID eventId);
 }
