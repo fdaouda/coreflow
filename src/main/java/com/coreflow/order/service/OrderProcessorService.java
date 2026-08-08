@@ -1,6 +1,6 @@
 package com.coreflow.order.service;
 
-import com.coreflow.config.RabbitMQConfig;
+import com.coreflow.config.rabbitmq.RabbitMQConfig;
 import com.coreflow.order.domain.Order;
 import com.coreflow.order.domain.OrderStatus;
 import com.coreflow.order.domain.ProcessedEvent;

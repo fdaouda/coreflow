@@ -1,4 +1,4 @@
-package com.coreflow.config;
+package com.coreflow.config.rabbitmq;
 
 import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;

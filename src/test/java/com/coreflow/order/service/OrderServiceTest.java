@@ -52,7 +52,7 @@ public class OrderServiceTest {
 
         Order savedOrder = new Order();
         savedOrder.setId(generatedOrderId);
-        savedOrder.setCustomerId(customerId.toString());
+        savedOrder.setCustomerId(customerId);
 
 
         // on simule ce que de orderRepository va save et ce qu'il retourne
@@ -82,7 +82,7 @@ public class OrderServiceTest {
 
         Order order = new Order();
         order.setId(UUID.randomUUID());
-        order.setCustomerId(customerId.toString());
+        order.setCustomerId(customerId);
         order.setCreatedAt(Instant.now());
         order.setStatus(OrderStatus.PENDING);
         order.setAmount(new BigDecimal(10));
@@ -120,11 +120,11 @@ public class OrderServiceTest {
         //given
         Order order1 = new Order();
         order1.setId(UUID.randomUUID());
-        order1.setCustomerId(UUID.randomUUID().toString());
+        order1.setCustomerId(UUID.randomUUID());
 
         Order order2 = new Order();
         order2.setId(UUID.randomUUID());
-        order2.setCustomerId(UUID.randomUUID().toString());
+        order2.setCustomerId(UUID.randomUUID());
 
         List<Order> orders = List.of(order1, order2);
 
