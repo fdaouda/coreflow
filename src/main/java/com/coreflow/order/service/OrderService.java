@@ -35,7 +35,7 @@ public class OrderService {
         //OrderCreated event kafka
         OrderCreatedEvent orderCreatedEvent = new OrderCreatedEvent(
                 savedOrder.getId(),
-                UUID.fromString(savedOrder.getCustomerId()),
+                savedOrder.getCustomerId(),
                 savedOrder.getAmount()
         );
 
@@ -58,5 +58,11 @@ public class OrderService {
         return orderRepository.findAll().stream()
                 .map(OrderMapper::toResponse)
                 .toList();
+    }
+
+
+    @Transactional
+    public List<UUID> getOrderByCustomerId(UUID customerId) {
+        return orderRepository.findOrderIdsByCustomerId(customerId).stream().toList();
     }
 }

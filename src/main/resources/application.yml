@@ -34,6 +34,13 @@ spring:
     port: 5672
     username: guest
     password: guest
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}  # Assurez-vous de définir cette variable d'environnement
+      chat:
+        options:
+          model: gpt-4o-mini
+          temperature: 0.2
 management:
   endpoints:
     web:
