@@ -23,7 +23,7 @@ public class Order {
     private UUID id;
 
     @Column(name = "customer_id", nullable = false)
-    private String customerId;
+    private UUID customerId;
 
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;

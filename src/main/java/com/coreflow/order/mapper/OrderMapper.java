@@ -7,7 +7,6 @@ import com.coreflow.order.domain.OrderStatus;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.UUID;
 
 
 public class OrderMapper {
@@ -23,7 +22,7 @@ public class OrderMapper {
         order.setStatus(OrderStatus.PENDING);
         order.setCreatedAt(Instant.now());
         order.setAmount(totalAmount);
-        order.setCustomerId(request.customerId().toString());
+        order.setCustomerId(request.customerId());
 
         return order;
     }
@@ -32,7 +31,7 @@ public class OrderMapper {
     public static OrderResponse toResponse(Order order) {
         return new OrderResponse(
                 order.getId(),
-                UUID.fromString(order.getCustomerId()),
+                order.getCustomerId(),
                 order.getStatus(),
                 order.getAmount(),
                 order.getCreatedAt());
